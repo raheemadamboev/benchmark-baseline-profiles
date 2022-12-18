@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">Benchmark Baseline Profile</string>
+
+    <!-- Main -->
+    <string name="click_me">Click me</string>
+    <string name="your_element">Element %1$d</string>
+    <string name="your_detail">Detail: %1$s</string>
+    <string name="default_text">Default</string>
 </resources>
