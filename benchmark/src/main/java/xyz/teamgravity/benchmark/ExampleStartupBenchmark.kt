@@ -28,22 +28,34 @@ class ExampleStartupBenchmark {
     val benchmarkRule = MacrobenchmarkRule()
 
     @Test
-    fun startup() = benchmarkRule.measureRepeated(
+    fun startUpCompilationModeNone() = startup(CompilationMode.None())
+
+    @Test
+    fun startUpCompilationModePartial() = startup(CompilationMode.Partial())
+
+    @Test
+    fun scrollAndNavigateCompilationModeNone() = scrollAndNavigate(CompilationMode.None())
+
+    @Test
+    fun scrollAndNavigateCompilationModePartial() = scrollAndNavigate(CompilationMode.Partial())
+
+    fun startup(mode: CompilationMode) = benchmarkRule.measureRepeated(
         packageName = "xyz.teamgravity.benchmarkbaselineprofile",
         metrics = listOf(StartupTimingMetric()),
         iterations = 5,
-        startupMode = StartupMode.COLD
+        startupMode = StartupMode.COLD,
+        compilationMode = mode
     ) {
         pressHome()
         startActivityAndWait()
     }
 
-    @Test
-    fun scrollAndNavigate() = benchmarkRule.measureRepeated(
+    fun scrollAndNavigate(mode: CompilationMode) = benchmarkRule.measureRepeated(
         packageName = "xyz.teamgravity.benchmarkbaselineprofile",
         metrics = listOf(FrameTimingMetric()),
         iterations = 5,
-        startupMode = StartupMode.COLD
+        startupMode = StartupMode.COLD,
+        compilationMode = mode
     ) {
         pressHome()
         startActivityAndWait()
